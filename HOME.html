@@ -1,0 +1,173 @@
+<html><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ethiopian Birr Exchange Rates</title>
+<link rel="stylesheet" type="text/css" href="Home_style.css"
+</head>
+<body>
+  <header>
+    <div class="logo">ቅኝት</div>
+    <nav>
+      <ul>
+        <li><a href="https://websim.example.com/">Home</a></li>
+        <li><a href="https://websim.example.com/about">About</a></li>
+        <li><a href="https://websim.example.com/contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <h1>Ethiopian Birr Exchange Rates</h1>
+    
+    <div class="revolving-window">
+      <h3>National Average Exchange Rates</h3>
+      <div class="rate-display" id="rate-display"></div>
+    </div>
+
+    <div class="converter">
+      <h3>Currency Converter</h3>
+      <form class="converter-form" id="converter-form">
+        <input type="number" id="amount" placeholder="Amount" required>
+        <select id="from-currency">
+          <option value="ETB">ETB</option>
+          <option value="USD">USD</option>
+          <option value="GBP">GBP</option>
+          <option value="AED">AED</option>
+          <option value="EUR">EUR</option>
+          <option value="JPY">JPY</option>
+          <option value="CNY">CNY</option>
+        </select>
+        <select id="to-currency">
+          <option value="ETB">ETB</option>
+          <option value="USD">USD</option>
+          <option value="GBP">GBP</option>
+          <option value="AED">AED</option>
+          <option value="EUR">EUR</option>
+          <option value="JPY">JPY</option>
+          <option value="CNY">CNY</option>
+        </select>
+        <button type="submit">Convert</button>
+      </form>
+      <div id="result"></div>
+    </div>
+
+    <h2>Currency Exchange Rates</h2>
+    
+    <div class="currency-grid">
+      <div class="currency-card">
+        <div class="flag-container">
+          <img src="https://flagcdn.com/w320/us.png" alt="USA Flag" class="flag" width="320" height="168">
+        </div>
+        <div class="currency-info">
+          <div class="currency-pair">USD/ETB</div>
+          <a href="C:\Users\amana\OneDrive\Documents\Forex info web\Websim version\USD.html" class="view-details">View Details</a>
+        </div>
+      </div>
+      
+      <div class="currency-card">
+        <div class="flag-container">
+          <img src="https://flagcdn.com/w320/gb.png" alt="UK Flag" class="flag" width="320" height="160">
+        </div>
+        <div class="currency-info">
+          <div class="currency-pair">GBP/ETB</div>
+          <a href="C:\Users\amana\OneDrive\Documents\Forex info web\Websim version\GBP.html" class="view-details">View Details</a>
+        </div>
+      </div>
+      
+      <div class="currency-card">
+        <div class="flag-container">
+          <img src="https://flagcdn.com/w320/ae.png" alt="UAE Flag" class="flag" width="320" height="160">
+        </div>
+        <div class="currency-info">
+          <div class="currency-pair">AED/ETB</div>
+          <a href="C:\Users\amana\OneDrive\Documents\Forex info web\Websim version\AED.html" class="view-details">View Details</a>
+        </div>
+      </div>
+      
+      <div class="currency-card">
+        <div class="flag-container">
+          <img src="https://flagcdn.com/w320/eu.png" alt="EU Flag" class="flag" width="320" height="213">
+        </div>
+        <div class="currency-info">
+          <div class="currency-pair">EUR/ETB</div>
+          <a href="C:\Users\amana\OneDrive\Documents\Forex info web\Websim version\EURO.html" class="view-details">View Details</a>
+        </div>
+      </div>
+      
+      <div class="currency-card">
+        <div class="flag-container">
+          <img src="https://flagcdn.com/w320/jp.png" alt="Japan Flag" class="flag" width="320" height="213">
+        </div>
+        <div class="currency-info">
+          <div class="currency-pair">JPY/ETB</div>
+          <a href="C:\Users\amana\OneDrive\Documents\Forex info web\Websim version\JPY.html" class="view-details">View Details</a>
+        </div>
+      </div>
+      
+      <div class="currency-card">
+        <div class="flag-container">
+          <img src="https://flagcdn.com/w320/cn.png" alt="China Flag" class="flag" width="320" height="213">
+        </div>
+        <div class="currency-info">
+          <div class="currency-pair">CNY/ETB</div>
+          <a href="C:\Users\amana\OneDrive\Documents\Forex info web\Websim version\CNY.html" class="view-details">View Details</a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    // Sample exchange rates (replace with real-time data in a production environment)
+    const exchangeRates = {
+      'USD/ETB': 54.32,
+      'GBP/ETB': 68.75,
+      'AED/ETB': 14.79,
+      'EUR/ETB': 59.21,
+      'JPY/ETB': 0.37,
+      'CNY/ETB': 7.56
+    };
+
+    // Function to update the revolving window
+    function updateRevolvingWindow() {
+      const rateDisplay = document.getElementById('rate-display');
+      const currencyPairs = Object.keys(exchangeRates);
+      let currentIndex = 0;
+
+      function showNextRate() {
+        const pair = currencyPairs[currentIndex];
+        const rate = exchangeRates[pair];
+        rateDisplay.textContent = `${pair}: ${rate.toFixed(2)}`;
+        currentIndex = (currentIndex + 1) % currencyPairs.length;
+      }
+
+      showNextRate(); // Show the first rate immediately
+      setInterval(showNextRate, 5000); // Change rate every 5 seconds
+    }
+
+    // Currency converter functionality
+    document.getElementById('converter-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const amount = parseFloat(document.getElementById('amount').value);
+      const fromCurrency = document.getElementById('from-currency').value;
+      const toCurrency = document.getElementById('to-currency').value;
+      let result;
+
+      if (fromCurrency === 'ETB' && toCurrency !== 'ETB') {
+        result = amount / exchangeRates[`${toCurrency}/ETB`];
+      } else if (fromCurrency !== 'ETB' && toCurrency === 'ETB') {
+        result = amount * exchangeRates[`${fromCurrency}/ETB`];
+      } else if (fromCurrency !== 'ETB' && toCurrency !== 'ETB') {
+        const toETB = amount * exchangeRates[`${fromCurrency}/ETB`];
+        result = toETB / exchangeRates[`${toCurrency}/ETB`];
+      } else {
+        result = amount; // ETB to ETB
+      }
+
+      document.getElementById('result').textContent = `${amount} ${fromCurrency} = ${result.toFixed(2)} ${toCurrency}`;
+    });
+
+    // Initialize the revolving window
+    updateRevolvingWindow();
+  </script>
+</body>
+</html>
